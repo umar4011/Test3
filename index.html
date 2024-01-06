@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Telegram Bot Messaging</title>
+</head>
+<body>
+
+<form id="messageForm">
+    <label for="message">Message:</label><br>
+    <input type="text" id="message" name="message"><br>
+    <button type="submit">Send Message</button>
+</form>
+
+<script>
+    document.getElementById("messageForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const BOT_TOKEN = "6184053476:AAGTb4xDA1C-Ru0bOvG1VmLwrZFN429OG1w";
+        const CHAT_ID = "5350055035";
+        const message = document.getElementById("message").value;
+
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${message}`, {
+            method: 'GET',
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            alert("Message sent successfully!");
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Failed to send message.");
+        });
+    });
+</script>
+
+</body>
+</html>
